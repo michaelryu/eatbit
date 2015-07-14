@@ -8,6 +8,6 @@ class TextMailer < ApplicationMailer
     @pic2 = text[3]
     @pic3 = text[4]
     @email = ENV['email']
-    mail(to: @email, subject: 'Update')
+    mail(to: @email, subject: 'Count it!')
   end
 end
