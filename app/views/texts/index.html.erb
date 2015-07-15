@@ -1,0 +1,11 @@
+<% if @texts.any? %>
+	<ul>
+    <% @texts.each do |text| %>
+    <div>
+      <%= text.phone %>
+      <%= text.user_id %>
+      <%= text.content %>
+      </div>
+    <% end %>
+  </ul>
+<% end %>
