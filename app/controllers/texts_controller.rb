@@ -3,9 +3,14 @@ class TextsController < ApplicationController
   skip_before_filter :force_ssl
 
   def create
-    # @text = [params['From'], params['Body'], params['MediaUrl0'], params['MediaUrl1'], params['MediaUrl2']]
-    # TextMailer.outbound(@text).deliver_now
-    # render xml: '<Response/>'
+    @text = Text.create(text_params)
+    client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
+                                      Rails.application.secrets.twilio_auth_token)
+    message = client.messages.create(from: '+1 (778) 654-6105',
+                                     to: @text.phone, body: @text.content)
+  end
+
+  def entry
     user
     @text = Text.create(phone: params['From'], user_id: @user.id,
                         content: params['Body'], picture: params['MediaUrl0'])
@@ -17,5 +22,10 @@ class TextsController < ApplicationController
     @user = User.create
     @user.update_attribute('phone', params['From'])
   end
+  
+  private
 
+  def text_params
+    params.require(:text).permit(:phone, :content, :user_id)
+  end
 end

@@ -1,10 +1,9 @@
-<p><%= @user.phone %></p> 
-<br>
+
+<div id="messages" style="min-height: 90vh;padding-bottom:10vh;overflow:auto;">
 <% if @user.texts.any? %>
 	<ul>
     <% @user.texts.each do |text| %>
     <div>
-      <%= text.phone %>
       <%= text.content %>
       <% unless text.picture.blank? %>
       	<%= image_tag text.picture, size: "400x400" %>
@@ -13,3 +12,15 @@
     <% end %>
   </ul>
 <% end %>
+</div>
+<%= form_for @text, remote: true do |f| %>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.hidden_field :phone, value: @user.phone  %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+
+<script>
+  var textarea = document.getElementById('messages');
+  textarea.scrollTop = textarea.scrollHeight;
+</script>
