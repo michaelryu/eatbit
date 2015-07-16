@@ -6,7 +6,7 @@ class TextsController < ApplicationController
     @text = Text.create(text_params)
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: '+1 (778) 654-6105',
+    message = client.messages.create(from: '+1 (415) 592-6475',
                                      to: @text.phone, body: @text.content)
   end
 
