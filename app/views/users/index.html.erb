@@ -1,0 +1,10 @@
+<% if @users.any? %>
+	<ul>
+    <% @users.each do |user| %>
+    <div>
+      <%= link_to user.phone, user_path(user.id) %>
+      <%= time_ago_in_words(user.updated_at) %>
+    </div>
+    <% end %>
+  </ul>
+<% end %>

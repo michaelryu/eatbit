@@ -4,6 +4,7 @@ class CreateTexts < ActiveRecord::Migration
       t.string :phone
       t.text :content
       t.integer :user_id
+      t.string :picture
       t.timestamps null: false
     end
   end

@@ -7,7 +7,8 @@ class TextsController < ApplicationController
     # TextMailer.outbound(@text).deliver_now
     # render xml: '<Response/>'
     user
-    @text = Text.create(phone: params['From'], user_id: @user.id, content: params['Body'])
+    @text = Text.create(phone: params['From'], user_id: @user.id,
+                        content: params['Body'], picture: params['MediaUrl0'])
   end
 
   def user
@@ -15,10 +16,6 @@ class TextsController < ApplicationController
     return if @user
     @user = User.create
     @user.update_attribute('phone', params['From'])
-  end
-
-  def index
-    @texts = Text.all
   end
 
 end

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'users', to: 'users#index'
+  get 'users/:id', to: 'users#show', as: :user
+
   post 'texts/create', to: 'texts#create'
-  get 'texts', to: 'texts#index'
   resource :texts
 end

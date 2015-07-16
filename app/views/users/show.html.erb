@@ -1,0 +1,15 @@
+<p><%= @user.phone %></p> 
+<br>
+<% if @user.texts.any? %>
+	<ul>
+    <% @user.texts.each do |text| %>
+    <div>
+      <%= text.phone %>
+      <%= text.content %>
+      <% unless text.picture.blank? %>
+      	<%= image_tag text.picture, size: "400x400" %>
+      <% end %>
+      </div>
+    <% end %>
+  </ul>
+<% end %>
