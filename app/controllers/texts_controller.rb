@@ -6,8 +6,9 @@ class TextsController < ApplicationController
     @text = Text.create(text_params)
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: '+1 (415) 592-6475',
-                                     to: @text.phone, body: @text.content)
+    message = client.messages.create(from: @text.owner,
+                                     to: +16665554545, body: @text.content)
+    redirect_to user_path(@text.user_id)
   end
 
   def entry
@@ -20,12 +21,12 @@ class TextsController < ApplicationController
     @user = User.find_by(phone: params['From'])
     return if @user
     @user = User.create
-    @user.update_attribute('phone', params['From'])
+    @user.update_attributes(phone: params['From'], owner: params['To'])
   end
   
   private
 
   def text_params
-    params.require(:text).permit(:phone, :content, :user_id)
+    params.require(:text).permit(:phone, :content, :user_id, :owner)
   end
 end

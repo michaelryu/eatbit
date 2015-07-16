@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150715191536) do
 
   create_table "texts", force: :cascade do |t|
     t.string   "phone"
+    t.string  "owner",     default: ""
     t.text     "content"
     t.integer  "user_id"
     t.string   "picture"
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150715191536) do
 
   create_table "users", force: :cascade do |t|
     t.string   "phone"
+    t.string  "owner",     default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
