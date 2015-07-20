@@ -7,11 +7,11 @@
       <% @user.texts.each do |text| %>
         <% if text.owner == "" %>
           <% panel_class = "success"%>
-          <% panel_title ="Entry"%> 
+          <% panel_title ="Entry"%>
           <% panel_margin ="margin-left: -40px;margin-right:40px" %>
-        <% else%>  
+        <% else%>
           <% panel_class = "primary"%>
-          <% panel_title ="Report"%> 
+          <% panel_title ="Report"%>
 
         <% end %>
         <div class="panel panel-<%= panel_class%>" style="<%= panel_margin %>">

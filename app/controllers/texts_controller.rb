@@ -7,7 +7,7 @@ class TextsController < ApplicationController
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
     message = client.messages.create(from: @text.owner,
-                                     to: +16665554545, body: @text.content)
+                                     to: @text.phone, body: @text.content)
     redirect_to user_path(@text.user_id)
   end
 
