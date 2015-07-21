@@ -22,8 +22,17 @@ class TextsController < ApplicationController
     return if @user
     @user = User.create
     @user.update_attributes(phone: params['From'], owner: params['To'])
+
+    Stripe.api_key = 'sk_test_o5ofSYlys1KuZJzSjThgYDsC'
+    token = params[:stripeToken]
+
+    customer = Stripe::Customer.create(
+      source: token,
+      plan: "basic-calorie-plan",
+      phone: @user.phone
+    )
   end
-  
+
   private
 
   def text_params

@@ -1,48 +1,14 @@
-
 <div class="container">
-<div class="col-sm-12 col-md-8 col-md-offset-2">
-  <div id="messages" style="height: 80vh;overflow:auto;">
-  <% if @user.texts.any? %>
-  	<ul>
-      <% @user.texts.each do |text| %>
-        <% if text.owner == "" %>
-          <% panel_class = "success"%>
-          <% panel_title ="Entry"%>
-          <% panel_margin ="margin-left: -40px;margin-right:40px" %>
-        <% else%>
-          <% panel_class = "primary"%>
-          <% panel_title ="Report"%>
-
-        <% end %>
-        <div class="panel panel-<%= panel_class%>" style="<%= panel_margin %>">
-          <div class="panel-heading">
-            <h3 class="panel-title"><%= panel_title %></h3>
-          </div>
-          <div class="panel-body">
-            <%= text.content %>
-            <% unless text.picture.blank? %>
-            	<%= image_tag text.picture, size: "250x250", class: "pull-right" %>
-            <% end %>
-          </div>
-        </div>
+  <div class="col-sm-12 col-md-8 col-md-offset-2">
+    <div id="messages" style="height: 80vh;overflow:auto;">
+      <% if @user.texts.any? %>
+        <%= render @text %>
       <% end %>
-    </ul>
-  <% end %>
+    </div>
+    <br>
+    <br>
+    <%= render 'form' %>
   </div>
-<br>
-<br>
-<%= form_for @text, remote: false do |f| %>
-  <div class="form-group">
-    <%= f.text_area :content, class: "form-control" %>
-  </div>
-  <%= f.hidden_field :user_id, value: @user.id %>
-  <%= f.hidden_field :phone, value: @user.phone  %>
-  <%= f.hidden_field :owner, value: @user.owner  %>
-  <div class="actions">
-    <%= f.submit "Send", class: "btn btn-primary" %>
-  </div>
-<% end %>
-</div>
 </div>
 <script>
   var textarea = document.getElementById('messages');
