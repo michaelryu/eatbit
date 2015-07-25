@@ -1,8 +1,13 @@
-<div class="panel panel-success">
+<% if entry.calorie == nil %>
+  <% entry_class = "warning"%>
+<% else%>
+  <% entry_class = "success"%>
+<% end %>
+<div class="panel panel-<%= entry_class %>">
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-6 panel-title">Entry from:  <%= link_to entry.user.phone, user_path(entry.user.id) %></div>
-      <div class="col-md-6 text-right"><%= time_ago_in_words(entry.updated_at) %> ago</div>
+      <div class="col-md-6 text-right">Sent <%= time_ago_in_words(entry.created_at) %> ago</div>
     </div>
   </div>
   <div class="panel-body">
@@ -18,7 +23,7 @@
         <div class="input-group">
           <%= f.text_field :calorie, class: "form-control" %>
           <div class="input-group-btn">
-            <button class="btn btn-success">
+            <button class="btn btn-<%= entry_class %>">
               <div class="glyphicon glyphicon-ok"></div>
             </button>
           </div>
@@ -32,7 +37,7 @@
       <div class="input-group">
         <%= f.text_field :content, value: "Question regarding entry: '#{entry.content}', ", class: "form-control" %>
         <div class="input-group-btn">
-          <button class="btn btn-success">Send</button>
+          <button class="btn btn-<%= entry_class %>">Send</button>
         </div>
       </div>
       <%= f.hidden_field :user_id, value: entry.user.id %>
