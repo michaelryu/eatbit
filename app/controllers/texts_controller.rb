@@ -6,15 +6,21 @@ class TextsController < ApplicationController
     @text = Text.create(text_params)
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: @text.owner,
+    message = client.messages.create(from: "415-769-3888",
                                      to: @text.phone, body: @text.content)
     redirect_to user_path(@text.user_id)
   end
 
   def entry
     user
+    @entry = Entry.create(phone: params['From'], user_id: @user.id,
+                          content: params['Body'], picture: params['MediaUrl0'])
+  end
+
+  def answer
+    user
     @text = Text.create(phone: params['From'], user_id: @user.id,
-                        content: params['Body'], picture: params['MediaUrl0'])
+                        content: params['Body'])
   end
 
   def user
@@ -22,15 +28,6 @@ class TextsController < ApplicationController
     return if @user
     @user = User.create
     @user.update_attributes(phone: params['From'], owner: params['To'])
-
-    Stripe.api_key = 'sk_test_o5ofSYlys1KuZJzSjThgYDsC'
-    token = params[:stripeToken]
-
-    customer = Stripe::Customer.create(
-      source: token,
-      plan: "basic-calorie-plan",
-      phone: @user.phone
-    )
   end
 
   private

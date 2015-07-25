@@ -11,26 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715191536) do
+ActiveRecord::Schema.define(version: 20150715183207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "texts", force: :cascade do |t|
+  create_table "entries", force: :cascade do |t|
     t.string   "phone"
-    t.string  "owner",     default: ""
     t.text     "content"
+    t.string   "calorie"
+    t.string   "owner"
     t.integer  "user_id"
     t.string   "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "texts", force: :cascade do |t|
+    t.string   "phone"
+    t.text     "content"
+    t.string   "owner",      default: ""
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "phone"
-    t.string  "owner",     default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "owner",      default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

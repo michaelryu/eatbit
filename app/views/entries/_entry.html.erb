@@ -1,0 +1,43 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-6 panel-title">Entry from:  <%= link_to entry.user.phone, user_path(entry.user.id) %></div>
+      <div class="col-md-6 text-right"><%= time_ago_in_words(entry.updated_at) %> ago</div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <% unless entry.picture.blank? %>
+      <%= image_tag entry.picture, size: "250x250" %>
+    <% end %>
+    <%= entry.content %>
+    <br>
+    <br>
+    <div class="pull-right">
+      <%= form_for entry, html: {class: "form-inline", id: "calorie"}, remote: true do |f| %>
+        <%= f.label :calorie %>
+        <div class="input-group">
+          <%= f.text_field :calorie, class: "form-control" %>
+          <div class="input-group-btn">
+            <button class="btn btn-success">
+              <div class="glyphicon glyphicon-ok"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <br>
+    <br>
+    <%= form_for @text, remote: true do |f| %>
+      <%= f.label :content, value: "Question" %>
+      <div class="input-group">
+        <%= f.text_field :content, value: "Question regarding entry: '#{entry.content}', ", class: "form-control" %>
+        <div class="input-group-btn">
+          <button class="btn btn-success">Send</button>
+        </div>
+      </div>
+      <%= f.hidden_field :user_id, value: entry.user.id %>
+      <%= f.hidden_field :phone, value: entry.user.phone  %>
+      <%= f.hidden_field :owner, value: entry.user.owner  %>
+    <% end %>
+  </div>
+</div>
