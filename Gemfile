@@ -23,7 +23,6 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'htmlentities'
 gem 'nokogiri_truncate_html'
-gem 'whenever', require: false
 gem 'sdoc', '0.4.0', group: :doc
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 

@@ -1,7 +1,7 @@
 task daily_summary: :environment do
   @calories = 0
   User.all.each do |user|
-    user.entries.where('created_at::date = ?', Date.today).each do |entry|
+    user.entries.where('created_at::date = ?', Date.today-1).each do |entry|
       @calories += entry.calorie.to_i
     end
     puts @calories
