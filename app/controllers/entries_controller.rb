@@ -6,6 +6,11 @@ class EntriesController < ApplicationController
   end
 
   def index
+    @entries = Entry.where(calorie: nil)
+    @text = Text.new
+  end
+
+  def all
     @entries = Entry.all
     @text = Text.new
   end

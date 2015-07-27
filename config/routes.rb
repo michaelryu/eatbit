@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'texts/entry', to: 'texts#entry'
   post 'texts/answer', to: 'texts#answer'
   get 'entries', to: "entries#index"
+  get 'entries/all', to: "entries#all"
   resources :entries
   resource :texts
 end
