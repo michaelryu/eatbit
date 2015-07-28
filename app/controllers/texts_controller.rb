@@ -4,11 +4,8 @@ class TextsController < ApplicationController
 
   def create
     @text = Text.create(text_params)
-    client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
-                                      Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: "415-769-3888",
-                                     to: @text.phone, body: @text.content)
-    redirect_to user_path(@text.user_id)
+    message(@text.phone, @text.content)
+    redirect_to "/users/#{@text.user.id}/texts"
   end
 
   def entry
@@ -28,6 +25,14 @@ class TextsController < ApplicationController
     return if @user
     @user = User.create
     @user.update_attributes(phone: params['From'], owner: params['To'])
+    message(@user.phone, "https://cf5c2507.ngrok.io/users/#{@user.id}")
+  end
+
+  def message(to, body)
+    client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
+                                      Rails.application.secrets.twilio_auth_token)
+    message = client.messages.create(from: '415-769-3888',
+                                     to: to, body: body)
   end
 
   private

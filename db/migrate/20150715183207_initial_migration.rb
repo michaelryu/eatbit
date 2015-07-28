@@ -2,13 +2,15 @@ class InitialMigration < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :phone
-      t.string :owner, default: ""
+      t.string :owner, default: ''
+      t.string :stripe_id
+      t.boolean :subscribed, default: false
       t.timestamps null: false
     end
     create_table :texts do |t|
       t.string :phone
       t.text :content
-      t.string :owner, default: ""
+      t.string :owner, default: ''
       t.integer :user_id
       t.timestamps null: false
     end

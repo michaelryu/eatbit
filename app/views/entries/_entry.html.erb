@@ -6,7 +6,7 @@
 <div class="panel panel-<%= entry_class %>">
   <div class="panel-heading">
     <div class="row">
-      <div class="col-md-6 panel-title">Entry from:  <%= link_to entry.user.phone, user_path(entry.user.id) %></div>
+      <div class="col-md-6 panel-title">Entry from:  <%= link_to entry.user.phone, "/users/#{entry.user.id}/texts" %></div>
       <div class="col-md-6 text-right">Sent <%= time_ago_in_words(entry.created_at) %> ago</div>
     </div>
   </div>

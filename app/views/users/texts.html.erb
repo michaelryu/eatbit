@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="col-sm-12 col-md-8 col-md-offset-2">
+    <div id="messages" style="height: 80vh;overflow:auto;">
+      <% if @user.texts.any? %>
+        <%= render @text%>
+      <% end %>
+    </div>
+    <br>
+    <br>
+    <%= render 'form' %>
+  </div>
+</div>
+<script>
+  var textarea = document.getElementById('messages');
+  textarea.scrollTop = textarea.scrollHeight;
+</script>
