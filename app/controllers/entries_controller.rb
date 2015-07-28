@@ -1,4 +1,6 @@
 class EntriesController < ApplicationController
+  before_filter :authenticate_admin_user!
+
   def create
   end
 
@@ -16,6 +18,9 @@ class EntriesController < ApplicationController
   end
 
   def destroy
+    @entry = Entry.find(params[:id])
+    @entry.destroy
+    redirect_to entries_path
   end
 
   def update

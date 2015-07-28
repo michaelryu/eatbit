@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   root 'pages#home'
   get 'users', to: 'users#index'
   get 'users/:id', to: 'users#show', as: :user
   get 'users/:id/texts', to: 'users#texts'
+  get 'users/:id/unsubscribe', to: 'users#unsubscribe'
   post 'users/:id/subscribe', to: 'users#subscribe'
   post 'texts/entry', to: 'texts#entry'
   post 'texts/answer', to: 'texts#answer'

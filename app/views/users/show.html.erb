@@ -1,12 +1,16 @@
-<script src="https://checkout.stripe.com/checkout.js"></script>
-<%= form_tag "/users/#{@user.id}/subscribe", method: :post do %>
-  <script
+<% if @user.subscribed? %>
+  <%= link_to "Unsubscribe", "/users/#{@user.id}/unsubscribe"  %>
+<% else %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <%= form_tag "/users/#{@user.id}/subscribe", method: :post do %>
+    <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_yIwDwqDsDVD4Ri30mbuu3Vp0"
+    data-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
     data-name="Eatbit"
     data-description="Pro Subscription ($19.99 per month)"
     data-amount="2999"
     panel-label="Subscribe"
     data-allow-remember-me="false"></script>
-<% end %>      
+  <% end %>
+<% end %>

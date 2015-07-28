@@ -1,4 +1,5 @@
 class TextsController < ApplicationController
+  before_filter :authenticate_admin_user!, except: [:entry, :answer]
   skip_before_filter :verify_authenticity_token
   skip_before_filter :force_ssl
 
@@ -31,7 +32,7 @@ class TextsController < ApplicationController
       @user = User.create
       @user.update_attributes(phone: params['From'], owner: params['To'])
       message(@user.phone, "Sign up here and get started!
-      https://cf5c2507.ngrok.io/users/#{@user.id}")
+      https://count-calories.herokuapp.com/users/#{@user.id}")
     end
   end
 

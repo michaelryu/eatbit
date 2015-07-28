@@ -22,6 +22,8 @@ gem 'twilio-ruby'
 gem 'geocoder'
 gem 'nokogiri'
 gem 'htmlentities'
+gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
 gem 'nokogiri_truncate_html'
 gem 'sdoc', '0.4.0', group: :doc
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'

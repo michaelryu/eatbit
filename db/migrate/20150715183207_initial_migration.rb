@@ -1,6 +1,7 @@
 class InitialMigration < ActiveRecord::Migration
   def change
-    create_table :users do |t|
+    enable_extension 'uuid-ossp'
+    create_table :users, id: :uuid do |t|
       t.string :phone
       t.string :owner, default: ''
       t.string :stripe_id
@@ -11,7 +12,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string :phone
       t.text :content
       t.string :owner, default: ''
-      t.integer :user_id
+      t.uuid :user_id
       t.timestamps null: false
     end
     create_table :entries do |t|
@@ -19,7 +20,7 @@ class InitialMigration < ActiveRecord::Migration
       t.text :content
       t.string :calorie
       t.string :owner
-      t.integer :user_id
+      t.uuid :user_id
       t.string :picture
       t.timestamps null: false
     end
