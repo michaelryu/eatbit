@@ -22,17 +22,17 @@ class TextsController < ApplicationController
 
   def user
     @user = User.find_by(phone: params['From'])
-    return if @user
-    @user = User.create
-    @user.update_attributes(phone: params['From'], owner: params['To'])
-    message(@user.phone, "https://cf5c2507.ngrok.io/users/#{@user.id}")
-  end
-
-  def message(to, body)
-    client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
-                                      Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: '415-769-3888',
-                                     to: to, body: body)
+    if @user.try(:subscribed?)
+      return
+    elsif @user && @user.subscribed == false
+      message(@user.phone, "Sign up here and get started!
+      https://cf5c2507.ngrok.io/users/#{@user.id}")
+    else
+      @user = User.create
+      @user.update_attributes(phone: params['From'], owner: params['To'])
+      message(@user.phone, "Sign up here and get started!
+      https://cf5c2507.ngrok.io/users/#{@user.id}")
+    end
   end
 
   private
