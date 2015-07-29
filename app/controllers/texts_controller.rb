@@ -27,7 +27,7 @@ class TextsController < ApplicationController
       return
     elsif @user && @user.subscribed == false
       message(@user.phone, "Sign up here and get started!
-      https://cf5c2507.ngrok.io/users/#{@user.id}")
+      https://count-calories.herokuapp.com/users/#{@user.id}")
     else
       @user = User.create
       @user.update_attributes(phone: params['From'], owner: params['To'])

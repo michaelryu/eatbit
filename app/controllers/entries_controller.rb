@@ -8,12 +8,13 @@ class EntriesController < ApplicationController
   end
 
   def index
-    @entries = Entry.where(calorie: nil)
+    @entries = Entry.joins(:user).where(
+      calorie: nil, users: { subscribed: false })
     @text = Text.new
   end
 
   def all
-    @entries = Entry.all
+    @entries = Entry.joins(:user).where(users: { subscribed: false })
     @text = Text.new
   end
 
@@ -29,7 +30,6 @@ class EntriesController < ApplicationController
   end
 
   def add_calories
-
   end
 
   private
