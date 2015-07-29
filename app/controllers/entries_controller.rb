@@ -9,12 +9,12 @@ class EntriesController < ApplicationController
 
   def index
     @entries = Entry.joins(:user).where(
-      calorie: nil, users: { subscribed: false })
+      calorie: nil, users: { subscribed: true })
     @text = Text.new
   end
 
   def all
-    @entries = Entry.joins(:user).where(users: { subscribed: false })
+    @entries = Entry.joins(:user).where(users: { subscribed: true })
     @text = Text.new
   end
 

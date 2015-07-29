@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_admin_user!, except: [:show, :subscribe, :unsubscribe]
+  before_filter :authenticate_admin_user!,
+                except: [:show, :subscribe, :unsubscribe]
 
   def index
     @users = User.all
