@@ -23,8 +23,9 @@ class UsersController < ApplicationController
     )
 
     @user.update_attributes(stripe_id: customer.id, subscribed: true)
-    message(@user.phone, "You are now signed up and ready to go!
-      Start texting us food today!")
+    message(@user.phone, "Welcome! You can now start logging what you eat by
+      sending in images, UPC codes, a text description or a calorie count.",
+            '415-592-6475')
     redirect_to root_path
   end
 

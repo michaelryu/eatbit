@@ -14,7 +14,7 @@ class EntriesController < ApplicationController
   end
 
   def all
-    @entries = Entry.joins(:user).where(users: { subscribed: true })
+    @entries = Entry.all
     @text = Text.new
   end
 

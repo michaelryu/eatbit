@@ -5,7 +5,7 @@ class TextsController < ApplicationController
 
   def create
     @text = Text.create(text_params)
-    message(@text.phone, @text.content)
+    message(@text.phone, @text.content, '415-769-3888')
     redirect_to "/users/#{@text.user.id}/texts"
   end
 
@@ -26,13 +26,14 @@ class TextsController < ApplicationController
     if @user.try(:subscribed?)
       return
     elsif @user && @user.subscribed == false
-      message(@user.phone, "Sign up here and get started!
-      https://count-calories.herokuapp.com/users/#{@user.id}")
+      message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
+        https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
+      message(@user.phone, "Questions? Just ask!", '415-592-6475')
     else
-      @user = User.create
-      @user.update_attributes(phone: params['From'], owner: params['To'])
-      message(@user.phone, "Sign up here and get started!
-      https://count-calories.herokuapp.com/users/#{@user.id}")
+      @user = User.create(phone: params['From'], owner: params['To'])
+      message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
+        https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
+      message(@user.phone, "Questions? Just ask!", '415-592-6475')
     end
   end
 
