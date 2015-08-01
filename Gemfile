@@ -20,7 +20,6 @@ gem 'pg'
 gem 'httparty'
 gem 'twilio-ruby'
 gem 'geocoder'
-gem "zbar"
 gem 'nokogiri'
 gem 'htmlentities'
 gem 'devise'
