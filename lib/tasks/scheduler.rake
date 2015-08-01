@@ -7,7 +7,7 @@ task daily_summary: :environment do
     puts @calories
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
-    message = client.messages.create(from: '415-769-3888',
+    message = client.messages.create(from: '415-592-6475',
                                      to: user.phone, body: "Your calorie count yesterday was: #{@calories}")
   end
 end

@@ -1,7 +1,7 @@
-<% if entry.calorie == nil %>
-  <% entry_class = "warning"%>
-<% else%>
+<% if entry.user.subscribed %>
   <% entry_class = "success"%>
+<% else%>
+  <% entry_class = "warning"%>
 <% end %>
 <div class="panel panel-<%= entry_class %>">
   <div class="panel-heading">

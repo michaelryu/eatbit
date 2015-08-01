@@ -8,8 +8,7 @@ class EntriesController < ApplicationController
   end
 
   def index
-    @entries = Entry.joins(:user).where(
-      calorie: nil, users: { subscribed: true })
+    @entries = Entry.where(calorie: nil)
     @text = Text.new
   end
 
