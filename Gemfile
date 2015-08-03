@@ -23,6 +23,8 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'htmlentities'
 gem 'devise'
+gem 'openfoodfacts'
+gem 'open_uri_redirections'
 gem 'activeadmin', github: 'activeadmin'
 gem 'nokogiri_truncate_html'
 gem 'sdoc', '0.4.0', group: :doc
