@@ -23,6 +23,7 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'htmlentities'
 gem 'devise'
+gem 'zbar'
 gem 'activeadmin', github: 'activeadmin'
 gem 'nokogiri_truncate_html'
 gem 'sdoc', '0.4.0', group: :doc

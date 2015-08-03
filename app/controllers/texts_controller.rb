@@ -13,6 +13,11 @@ class TextsController < ApplicationController
     user
     @entry = Entry.create(phone: params['From'], user_id: @user.id,
                           content: params['Body'], picture: params['MediaUrl0'])
+    if params['MediaUrl0']
+      respond_to do |format|
+        format.js { render js: 'my_function();' }
+      end
+    end
   end
 
   def answer
@@ -28,12 +33,12 @@ class TextsController < ApplicationController
     elsif @user && @user.subscribed == false
       message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
         https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
-      message(@user.phone, "Questions? Just ask!", '415-592-6475')
+      message(@user.phone, 'Questions? Just ask!', '415-592-6475')
     else
       @user = User.create(phone: params['From'], owner: params['To'])
       message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
         https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
-      message(@user.phone, "Questions? Just ask!", '415-592-6475')
+      message(@user.phone, 'Questions? Just ask!', '415-592-6475')
     end
   end
 
