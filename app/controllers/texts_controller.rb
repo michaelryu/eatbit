@@ -16,6 +16,7 @@ class TextsController < ApplicationController
     return unless params['MediaUrl0']
     link = process_uri(params['MediaUrl0'])
     img = MiniMagick::Image.open(link)
+    require 'zbar'
     data = ZBar::Image.from_pgm(img.format('PGM').to_blob).process
     code = data[0].instance_variable_get(:@data)
     product = Openfoodfacts::Product.get(code, locale: 'world')
