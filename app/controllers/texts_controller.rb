@@ -20,13 +20,11 @@ class TextsController < ApplicationController
   def upc
     link = process_uri(params['MediaUrl0'])
     img = MiniMagick::Image.open(link)
-    data = `./.apt/usr/bin/zbarimg #{img.format('PGM').to_blob}`
+    data = `./.apt/usr/bin/zbarimg -q #{img}`
     puts data
     # data = ZBar::Image.from_pgm(img.format('PGM').to_blob).process
-    code = data[0].instance_variable_get(:@data)
     puts "testing-"
-    puts code
-    product = Openfoodfacts::Product.get(code, locale: 'world')
+    product = Openfoodfacts::Product.get(data, locale: 'world')
     return if product.nil?
     @entry.update_attribute(:calorie, product.nutriments.energy)
   end
