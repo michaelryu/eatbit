@@ -18,7 +18,7 @@ class TextsController < ApplicationController
     img = MiniMagick::Image.open(link)
     data = ZBar::Image.from_pgm(img.format('PGM').to_blob).process
     code = data[0].instance_variable_get(:@data)
-    puts "testing"
+    puts "testing-"
     puts code
     product = Openfoodfacts::Product.get(code, locale: 'world')
     return if product.nil?
