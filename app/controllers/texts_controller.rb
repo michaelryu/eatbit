@@ -32,18 +32,11 @@ class TextsController < ApplicationController
 
   def user
     @user = User.find_by(phone: params['From'])
-    if @user.try(:subscribed?)
-      return
-    elsif @user && @user.subscribed == false
-      message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
+    return if @user
+    @user = User.create(phone: params['From'], owner: params['To'])
+    message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
         https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
-      message(@user.phone, 'Questions? Just ask!', '415-592-6475')
-    else
-      @user = User.create(phone: params['From'], owner: params['To'])
-      message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
-        https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
-      message(@user.phone, 'Questions? Just ask!', '415-592-6475')
-    end
+    message(@user.phone, 'Questions? Just ask!', '415-592-6475')
   end
 
   private
