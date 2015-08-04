@@ -12,6 +12,10 @@ class EntriesController < ApplicationController
     @text = Text.new
   end
 
+  def show
+    @entry = Entry.find(params[:id])
+  end
+
   def all
     @entries = Entry.all
     @text = Text.new
