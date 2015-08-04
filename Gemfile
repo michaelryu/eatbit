@@ -23,6 +23,7 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'htmlentities'
 gem 'devise'
+gem 'zbar'
 gem 'openfoodfacts'
 gem 'open_uri_redirections'
 gem 'activeadmin', github: 'activeadmin'
@@ -34,7 +35,6 @@ group :development, :test do
   gem 'byebug', '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'pry'
-  gem 'zbar'
   gem 'pry-rails'
 end
 
