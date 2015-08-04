@@ -4,7 +4,7 @@ task daily_summary: :environment do
     user.entries.where('created_at::date = ?', Date.today - 1).each do |entry|
       @calories += entry.calorie.to_i
     end
-    puts @calories
+    next if @calories == 0
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
     message = client.messages.create(from: '415-592-6475',
