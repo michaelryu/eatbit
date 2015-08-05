@@ -3,7 +3,10 @@
     <h1 id="title" class="purple">Eatbit</h1>
   </div>
   <% if @user.subscribed? %>
-    <%= link_to "Unsubscribe", "/users/#{@user.id}/unsubscribe"  %>
+    <div class="col-xs-12">
+      <p class="lead">Stop tracking caloires?</p>
+      <%= button_to "Unsubscribe", "/users/#{@user.id}/unsubscribe", class: "alert alert-purple text-center unsub col-xs-12", data: { confirm: "Are you sure?" }, method: :get %>
+    </div>
   <% else %>
     <div class="col-xs-12">
       <p class="lead">Subscribe for $29.99</p>

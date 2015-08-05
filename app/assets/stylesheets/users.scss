@@ -1,7 +1,7 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#title, label, button, .lead, input {
+#title, label, button, .lead, input, .unsub {
   font-family: Montserrat;
 }
 
@@ -26,4 +26,14 @@ input[type="text"]:focus {
   border-color: #6f5499;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #6f5499;
   outline: 0 none;
+}
+
+.alert-purple {
+  color: white;
+  border-color: #6f5499;
+  background-color: #6f5499;
+}
+
+.unsub {
+  color: white;
 }
