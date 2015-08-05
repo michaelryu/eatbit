@@ -1,3 +1,6 @@
 libzbar-dev
 zbar-tools
 imagemagick
+jpeg
+libtiff
+jasper
