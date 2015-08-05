@@ -18,7 +18,7 @@ class TextsController < ApplicationController
   end
 
   def upc
-    link = params['MediaUrl0']
+    link = open(params['MediaUrl0'], allow_redirections: :all).base_uri.to_s
     data = `./.apt/usr/bin/zbarimg -q #{link}`.partition(':').last.to_s.strip!
     api = "http://world.openfoodfacts.org/api/v0/produit/#{data}.json"
     uri = URI.parse(URI.encode(api))
@@ -47,13 +47,5 @@ class TextsController < ApplicationController
 
   def text_params
     params.require(:text).permit(:phone, :content, :user_id, :owner)
-  end
-
-  def process_uri(uri)
-    require 'open-uri'
-    require 'open_uri_redirections'
-    open(uri, allow_redirections: :all) do |r|
-      r.base_uri.to_s
-    end
   end
 end
