@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_admin_user!,
                 except: [:show, :subscribe, :unsubscribe]
+  skip_before_filter :verify_authenticity_token
 
   def index
     @users = User.all
@@ -13,13 +14,11 @@ class UsersController < ApplicationController
   def subscribe
     @user = User.find(params[:id])
 
-    token = params[:stripeToken]
-    email = params[:stripeEmail]
+    token = params[:reservation][:stripe_token]
 
     customer = Stripe::Customer.create(
       source: token,
-      plan: 'basic-calorie-plan',
-      email: email
+      plan: 'basic-calorie-plan'
     )
 
     @user.update_attributes(stripe_id: customer.id, subscribed: true)
