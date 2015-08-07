@@ -30,6 +30,7 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(entry_params)
+    redirect_to entries_path
   end
 
   def add_calories

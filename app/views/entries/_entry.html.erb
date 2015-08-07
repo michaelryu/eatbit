@@ -18,7 +18,7 @@
     <br>
     <br>
     <div class="pull-right">
-      <%= form_for entry, html: {class: "form-inline", id: "calorie"}, remote: true do |f| %>
+      <%= form_for entry, html: {class: "form-inline", id: "calorie"}, remote: false do |f| %>
         <%= f.label :calorie %>
         <div class="input-group">
           <%= f.text_field :calorie, class: "form-control" %>
