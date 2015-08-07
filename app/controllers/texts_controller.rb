@@ -39,7 +39,8 @@ class TextsController < ApplicationController
     return if @user
     @user = User.create(phone: params['From'], owner: params['To'])
     message(@user.phone, "Hi, welcome to Eatbit! Click to pay and enable your account:
-        https://count-calories.herokuapp.com/users/#{@user.id}", '415-592-6475')
+        http://x.eatbit.co/users/#{@user.id}
+        Secure payment by http://www.stripe.com Stripe", '415-592-6475')
     message(@user.phone, 'Questions? Just ask!', '415-592-6475')
   end
 
