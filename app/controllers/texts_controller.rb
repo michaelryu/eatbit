@@ -19,7 +19,7 @@ class TextsController < ApplicationController
 
   def upc
     link = open(params['MediaUrl0'], allow_redirections: :all).base_uri.to_s
-    data = `zbarimg -q #{link}`.partition(':').last.to_s.strip!
+    data = `./.apt/usr/bin/zbarimg -q #{link}`.partition(':').last.to_s.strip!
     api = "http://world.openfoodfacts.org/api/v0/produit/#{data}.json"
     uri = URI.parse(URI.encode(api))
     product = JSON.load(open(uri))
