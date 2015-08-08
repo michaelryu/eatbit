@@ -21,7 +21,9 @@ class TextsController < ApplicationController
   def slack
     webhook_url = 'https://hooks.slack.com/services/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'
     poster = Slack::Poster.new(webhook_url)
-    poster.send_message('New entry posted')
+    message = 'New entry posted'
+    message << ": #{params['Body']}" unless params['Body'] == ''
+    poster.send_message(message)
   end
 
   def upc
