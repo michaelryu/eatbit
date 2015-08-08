@@ -1,8 +1,12 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#title, label, button, .lead, input, .unsub {
+#title, label, button, .lead, input, .unsub, h5 {
   font-family: Montserrat;
+}
+
+h5 {
+  padding-bottom: 20px;
 }
 
 #title {
