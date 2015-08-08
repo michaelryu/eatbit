@@ -344,6 +344,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    slack-poster (1.0.1)
+      httparty (~> 0.12)
     slop (3.6.0)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -413,6 +415,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails
   sdoc (= 0.4.0)
+  slack-poster
   stripe!
   timecop
   turbolinks

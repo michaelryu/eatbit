@@ -13,8 +13,15 @@ class TextsController < ApplicationController
     user
     @entry = Entry.create(phone: params['From'], user_id: @user.id,
                           content: params['Body'], picture: params['MediaUrl0'])
+    slack
     return unless params['MediaUrl0']
     upc
+  end
+
+  def slack
+    webhook_url = 'https://hooks.slack.com/services/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'
+    poster = Slack::Poster.new(webhook_url)
+    poster.send_message('New entry posted')
   end
 
   def upc
