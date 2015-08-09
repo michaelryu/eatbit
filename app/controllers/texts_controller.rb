@@ -51,8 +51,7 @@ class TextsController < ApplicationController
     @user = User.find_by(phone: params['From'])
     return if @user
     @user = User.create(phone: params['From'], owner: params['To'])
-    message(@user.phone, "Hi, welcome to Eatbit!
-      Click to pay and enable your account: http://x.eatbit.co/users/#{@user.id}",
+    message(@user.phone, "Welcome to Eatbit! Click to subscribe and enable your account: http://x.eatbit.co/users/#{@user.id}",
             '415-592-6475')
     message(@user.phone, 'Questions? Just ask!', '415-592-6475')
   end
