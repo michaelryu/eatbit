@@ -36,13 +36,8 @@ class TextsController < ApplicationController
       @entry.update_attribute(:calorie,
                               product['product']['nutriments']['energy'])
     else
-      message(@user.phone,
-<<<<<<< HEAD
-              'We could not find the product! Could you give us a short description of it?', '415-592-6475')
-=======
-              'We could not find the product!
-              Could you give us a short description of it?', '415-592-6475')
->>>>>>> 4c58e0c... changed question line to secondary
+      message(@user.phone, 'We could not find the product!
+        Could you give us a short description of it?', '415-769-3888')
     end
   end
 
