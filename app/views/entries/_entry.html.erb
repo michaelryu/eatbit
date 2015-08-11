@@ -35,7 +35,7 @@
     <% end %>
     <br>
     <br>
-    <%= form_for @text, remote: true do |f| %>
+    <%= form_for @text, remote: false do |f| %>
       <%= f.label :content, value: "Question" %>
       <div class="input-group">
         <%= f.text_field :content, value: question, class: "form-control" %>
