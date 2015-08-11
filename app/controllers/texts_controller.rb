@@ -5,7 +5,10 @@ class TextsController < ApplicationController
 
   def create
     @text = Text.create(text_params)
-    message(@text.phone, @text.content, '415-769-3888')
+    unless @text.picture.blank?
+      link = open(@text.picture, allow_redirections: :all).base_uri.to_s
+    end
+    message(@text.phone, @text.content, '415-769-3888', *link)
     redirect_to "/users/#{@text.user.id}/texts"
   end
 
@@ -59,6 +62,6 @@ class TextsController < ApplicationController
   private
 
   def text_params
-    params.require(:text).permit(:phone, :content, :user_id, :owner)
+    params.require(:text).permit(:phone, :content, :user_id, :owner, :picture)
   end
 end

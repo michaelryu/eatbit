@@ -11,8 +11,11 @@
     </div>
   </div>
   <div class="panel-body">
-    <% unless entry.picture.blank? %>
+    <% if  entry.picture.blank? %>
+      <% question = "Question regarding entry: '#{entry.content}', " %>
+    <% else %>
       <%= image_tag entry.picture, size: "250x250" %>
+      <% question = "Question regarding this picture, " %>
     <% end %>
     <%= entry.content %>
     <br>
@@ -35,7 +38,7 @@
     <%= form_for @text, remote: true do |f| %>
       <%= f.label :content, value: "Question" %>
       <div class="input-group">
-        <%= f.text_field :content, value: "Question regarding entry: '#{entry.content}', ", class: "form-control" %>
+        <%= f.text_field :content, value: question, class: "form-control" %>
         <div class="input-group-btn">
           <button class="btn btn-<%= entry_class %>">Send</button>
         </div>
@@ -43,6 +46,7 @@
       <%= f.hidden_field :user_id, value: entry.user.id %>
       <%= f.hidden_field :phone, value: entry.user.phone  %>
       <%= f.hidden_field :owner, value: entry.user.owner  %>
+      <%= f.hidden_field :picture, value: entry.picture  %>
     <% end %>
   </div>
 </div>
