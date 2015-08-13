@@ -12,9 +12,8 @@
       <p class="lead">Subscribe for $29.99 per month, cancel anytime.</p>
       <h5>Secure payment by <a href="http://www.stripe.com" target="_blank">Stripe</a></h5>
     </div>
-    <%= javascript_include_tag 'body/subscribe' %>
     <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
-    <form accept-charset="UTF-8" action="/users/<%= @user.id %>/subscribe" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>" id="payment-form" method="post">
+    <form accept-charset="UTF-8" action="/users/<%= @user.id %>/subscribe" data-cc-on-file="false" data-stripe-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>" id="payment-form" method="post">
       <div class='col-xs-12 form-group card required'>
         <label class='control-label purple'>Card Number</label>
         <input autocomplete='off' class='form-control card-number' maxlength='20' type='text'>

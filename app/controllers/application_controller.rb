@@ -11,10 +11,12 @@ class ApplicationController < ActionController::Base
   end
 
   def slack(message)
+    return if Rails.env.development?
     webhook_url = 'https://hooks.slack.com/services/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'
     poster = Slack::Poster.new(webhook_url)
-    message = 'New entry posted'
-    message << ": #{params['Body']}" unless params['Body'] == ''
+    if message == 'New entry posted'
+      message << ": #{params['Body']}" unless params['Body'] == ''
+    end
     poster.send_message(message)
   end
 end

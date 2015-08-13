@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_admin_user!,
-                except: [:show, :subscribe, :unsubscribe]
+    except: [:show, :subscribe, :unsubscribe]
   skip_before_filter :verify_authenticity_token
 
   def index
@@ -13,18 +13,19 @@ class UsersController < ApplicationController
 
   def subscribe
     @user = User.find(params[:id])
+    unless @user.subscribed
+      token = params[:reservation][:stripe_token]
+      customer = Stripe::Customer.create(
+        source: token,
+        plan: 'basic-calorie-plan',
+        metadata: { 'phone' => "#{@user.phone}" }
+      )
 
-    token = params[:reservation][:stripe_token]
-
-    customer = Stripe::Customer.create(
-      source: token,
-      plan: 'basic-calorie-plan'
-    )
-
-    @user.update_attributes(stripe_id: customer.id, subscribed: true)
-    slack('New user has signed up')
-    message(@user.phone, "Welcome! You can now start logging what you eat by sending in images, UPC codes, a text description or a calorie count.",
-            '415-592-6475')
+      @user.update_attributes(stripe_id: customer.id, subscribed: true)
+      slack('New user has signed up')
+      message(@user.phone, "Welcome! You can now start logging what you eat by sending in images, UPC codes, a text description or a calorie count.",
+              '415-592-6475')
+    end
     redirect_to root_path
   end
 
