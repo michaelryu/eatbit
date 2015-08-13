@@ -40,6 +40,10 @@ class TextsController < ApplicationController
                               product['product']['nutriments']['energy'])
     else
       message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
+      webhook_url = 'https://hooks.slack.com/services/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'
+      poster = Slack::Poster.new(webhook_url)
+      message = "Couldn't find UPC code: #{data}, image: #{link}"
+      poster.send_message(message)
     end
   end
 
