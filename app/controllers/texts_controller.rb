@@ -16,17 +16,9 @@ class TextsController < ApplicationController
     user
     @entry = Entry.create(phone: params['From'], user_id: @user.id,
                           content: params['Body'], picture: params['MediaUrl0'])
-    slack
+    slack('New entry posted')
     return unless params['MediaUrl0']
     upc
-  end
-
-  def slack
-    webhook_url = 'https://hooks.slack.com/services/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'
-    poster = Slack::Poster.new(webhook_url)
-    message = 'New entry posted'
-    message << ": #{params['Body']}" unless params['Body'] == ''
-    poster.send_message(message)
   end
 
   def upc
@@ -40,10 +32,7 @@ class TextsController < ApplicationController
                               product['product']['nutriments']['energy'])
     else
       message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
-      webhook_url = 'https://hooks.slack.com/services/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'
-      poster = Slack::Poster.new(webhook_url)
-      message = "Couldn't find UPC code: #{data}, image: #{link}"
-      poster.send_message(message)
+      slack("Couldn't find UPC code: #{data}, image: #{link}")
     end
   end
 

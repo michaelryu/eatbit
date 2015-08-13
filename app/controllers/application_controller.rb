@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
     message = client.messages.create(from: number,
                                      to: to, body: body, media_url: args)
   end
+
+  def slack(message)
+    webhook_url = 'https://hooks.slack.com/services/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'
+    poster = Slack::Poster.new(webhook_url)
+    message = 'New entry posted'
+    message << ": #{params['Body']}" unless params['Body'] == ''
+    poster.send_message(message)
+  end
 end
