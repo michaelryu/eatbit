@@ -39,8 +39,7 @@ class TextsController < ApplicationController
       @entry.update_attribute(:calorie,
                               product['product']['nutriments']['energy'])
     else
-      message(@user.phone, 'We could not find this product!
-        Could you give us a short description of it?', '415-769-3888', link)
+      message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
     end
   end
 

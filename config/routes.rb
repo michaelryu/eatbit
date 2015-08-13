@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root 'pages#home'
+  root :to => redirect("http://www.eatbit.co/")
   get 'users', to: 'users#index'
   get 'users/:id', to: 'users#show', as: :user
   get 'users/:id/texts', to: 'users#texts'
