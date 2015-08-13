@@ -24,15 +24,23 @@ class TextsController < ApplicationController
   def upc
     link = open(params['MediaUrl0'], allow_redirections: :all).base_uri.to_s
     data = `./.apt/usr/bin/zbarimg -q #{link}`.partition(':').last.to_s.strip!
-    api = "http://world.openfoodfacts.org/api/v0/produit/#{data}.json"
-    uri = URI.parse(URI.encode(api))
-    product = JSON.load(open(uri))
-    if product['status'] == 1
-      @entry.update_attribute(:calorie,
-                              product['product']['nutriments']['energy'])
+    require 'factual'
+    factual = Factual.new(ENV['FACTUAL_KEY'],
+                          ENV['FACTUAL_SECRET'])
+    product = factual.table('products-cpg-nutrition').search(data).rows
+    if !product.blank?
+      @entry.update_attribute(:calorie, product[0]['calories'].to_s)
     else
-      message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
-      slack("Couldn't find UPC code: #{data}, image: #{link}")
+      api = "http://world.openfoodfacts.org/api/v0/produit/#{data}.json"
+      uri = URI.parse(URI.encode(api))
+      product = JSON.load(open(uri))
+      if product['status'] == 1
+        @entry.update_attribute(:calorie,
+                                product['product']['nutriments']['energy'])
+      else
+        message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
+        slack("Couldn't find UPC code: #{data}, image: #{link}")
+      end
     end
   end
 
