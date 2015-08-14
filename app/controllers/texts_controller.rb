@@ -16,7 +16,7 @@ class TextsController < ApplicationController
     user
     @entry = Entry.create(phone: params['From'], user_id: @user.id,
                           content: params['Body'], picture: params['MediaUrl0'])
-    slack('New entry posted')
+    slack("New entry posted: #{params['Body']} #{params['MediaUrl0']}")
     return unless params['MediaUrl0']
     upc
   end
@@ -31,6 +31,7 @@ class TextsController < ApplicationController
     product = factual.table('products-cpg-nutrition').search(data).rows
     if !product.blank?
       @entry.update_attribute(:calorie, product[0]['calories'].to_s)
+      slack("Entry assigned calories from: https://www.factual.com/#{product[0]['factual_id']}")
     else
       api = "http://world.openfoodfacts.org/api/v0/produit/#{data}.json"
       uri = URI.parse(URI.encode(api))
@@ -38,9 +39,10 @@ class TextsController < ApplicationController
       if product['status'] == 1
         @entry.update_attribute(:calorie,
                                 product['product']['nutriments']['energy'])
+        slack("Entry assigned calories from: http://world.openfoodfacts.org/product/#{data}")
       else
         message(@user.phone, 'We could not find this product! Could you give us a short description of it?', '415-769-3888', link)
-        slack("Couldn't find UPC code: #{data}, image: #{link}")
+        slack("Couldn't find UPC code: #{data}")
       end
     end
   end
