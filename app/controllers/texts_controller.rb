@@ -23,7 +23,11 @@ class TextsController < ApplicationController
 
   def upc
     link = open(params['MediaUrl0'], allow_redirections: :all).base_uri.to_s
-    data = `./.apt/usr/bin/zbarimg -q #{link}`.partition(':').last.to_s.strip!
+    if Rails.env.development?
+      data = `zbarimg -q #{link}`.partition(':').last.to_s.strip!
+    else
+      data = `./.apt/usr/bin/zbarimg -q #{link}`.partition(':').last.to_s.strip!
+    end
     return if data.nil?
     require 'factual'
     factual = Factual.new(ENV['FACTUAL_KEY'],

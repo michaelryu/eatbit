@@ -23,7 +23,7 @@ default: &default
 
 development:
   adapter: postgresql
-  database: psqlapp_development
+  database: michaelryu
   host: localhost
 
 test:

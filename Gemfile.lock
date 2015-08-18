@@ -220,6 +220,7 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    htmlbeautifier (1.1.1)
     htmlentities (4.3.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -401,6 +402,7 @@ DEPENDENCIES
   fog
   geocoder
   guard-minitest
+  htmlbeautifier
   htmlentities
   httparty
   jbuilder
@@ -429,3 +431,6 @@ DEPENDENCIES
   web-console (= 2.0.0.beta3)
   will_paginate
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.10.6

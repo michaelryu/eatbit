@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_admin_user!,
-    except: [:show, :subscribe, :unsubscribe]
+    except: [:show, :subscribe, :unsubscribe, :log]
   skip_before_filter :verify_authenticity_token
 
   def index
@@ -27,6 +27,14 @@ class UsersController < ApplicationController
               '415-592-6475')
     end
     redirect_to root_path
+  end
+
+  def log
+    @user = User.find(params[:id])
+    @entries = @user.entries
+    @logs = @entries.group_by do |entry|
+      entry.created_at.strftime("%Y-%m-%d")
+    end
   end
 
   def unsubscribe

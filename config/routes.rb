@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'users/:id/texts', to: 'users#texts'
   get 'users/:id/unsubscribe', to: 'users#unsubscribe'
   post 'users/:id/subscribe', to: 'users#subscribe'
+  get 'users/:id/log', to: 'users#log'
   post 'texts/entry', to: 'texts#entry'
   post 'texts/answer', to: 'texts#answer'
   get 'entries', to: 'entries#index'

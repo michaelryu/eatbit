@@ -6,8 +6,8 @@
 <div class="panel panel-<%= entry_class %>">
   <div class="panel-heading">
     <div class="row">
-      <div class="col-md-6 panel-title">Entry from:  <%= link_to entry.user.phone, "/users/#{entry.user.id}/texts" %></div>
-      <div class="col-md-6 text-right">Sent <%= time_ago_in_words(entry.created_at) %> ago <%= link_to "Delete", entry , method: :delete, data: { confirm: "Are you sure?" }, class: "link" %></div>
+      <div class="col-sm-6 panel-title">Entry from:  <%= link_to entry.user.phone, "/users/#{entry.user.id}/texts" %></div>
+      <div class="col-sm-6 text-right">Sent <%= time_ago_in_words(entry.created_at) %> ago <%= link_to "Delete", entry , method: :delete, data: { confirm: "Are you sure?" }, class: "link" %></div>
     </div>
   </div>
   <div class="panel-body">

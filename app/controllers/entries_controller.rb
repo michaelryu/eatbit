@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_filter :authenticate_admin_user!
+  before_filter :authenticate_admin_user!, except: [:update]
 
   def create
   end
@@ -30,7 +30,7 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(entry_params)
-    redirect_to entries_path
+    redirect_to :back
   end
 
   def add_calories
