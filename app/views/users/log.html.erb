@@ -1,42 +1,42 @@
 <br>
-<div class="col-sm-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
+<div class="col-xs-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
   <% @logs.each do |day, entries| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row">
           <% if Date.today.to_s == day %>
-            <h4 class="col-sm-6">Today</h4>
+            <h4 class="col-xs-6">Today</h4>
           <% else %>
-            <h4 class="col-sm-6"><%= day %></h4>
+            <h4 class="col-xs-6"><%= day %></h4>
           <% end %>
           <% @calories = 0 %>
           <% entries.each do |entry| %>
             <% @calories += entry.calorie.to_i %>
           <% end %>
-          <p class="col-sm-6 text-right" style="padding-top:10px">Calories: <%= @calories %></p>
+          <p class="col-xs-6 text-right" style="padding-top:10px">Calories: <%= @calories %></p>
         </div>
       </div>
       <div class="panel-body">
         <% entries.each do |entry| %>
-          <div class="col-sm-12"style="padding:10px 0 10px 0;">
-            <div class="col-sm-2">
+          <div class="col-xs-12"style="padding:10px 0 10px 0;">
+            <div class="col-xs-4 col-sm-2">
               <% if  entry.picture %>
                 <%= image_tag entry.picture, class: "img-responsive" %>
               <% else %>
-                <%= image_tag "square.jpg", class: "img-responsive hide-mobile" %>
+                <%= image_tag "square.jpg", class: "img-responsive" %>
               <% end %>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-8 col-sm-6">
               <% if entry.content.blank? %>
                 <p>Entry Posted</p>
               <% else %>
                 <p><%= entry.content %></p>
               <% end %>
             </div>
-            <div class="col-sm-4">
+            <div class="col-xs-12 col-sm-4 mobile-padding">
               <div class="pull-right-mobile">
                 <%= form_for entry, html: {class: "form-inline", id: "calorie"}, remote: false do |f| %>
-                  <%= f.label :calorie %>
+                  <%= f.label :calorie, class: "hide-mobile" %>
                   <div class="input-group">
                     <%= f.text_field :calorie, class: "form-control" %>
                     <div class="input-group-btn">

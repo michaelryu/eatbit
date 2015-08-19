@@ -65,6 +65,10 @@ input[type="text"]:focus {
 }
 
 @media (max-width: 600px) {
+  .mobile-padding {
+    padding: 10px 0 20px 0;
+  }
+
   .hide-mobile {
     display: none;
   }
