@@ -4,9 +4,14 @@ task daily_summary: :environment do
     user.entries.where('created_at::date = ?', Date.today - 1).each do |entry|
       @calories += entry.calorie.to_i
     end
+    if @calories == 0
+      body = "Whoops looks like we didn't record anything for you yesterday. Don’t forget to text us your food today."
+    else
+      body = "Your calorie count yesterday was: #{@calories}"
+    end
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
     message = client.messages.create(from: '415-592-6475',
-                                     to: user.phone, body: "Your calorie count yesterday was: #{@calories}")
+                                     to: user.phone, body: body)
   end
 end
