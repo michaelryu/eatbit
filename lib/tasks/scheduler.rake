@@ -7,7 +7,7 @@ task daily_summary: :environment do
     if @calories == 0
       body = "Whoops looks like we didn't record anything for you yesterday. Don’t forget to text us your food today."
     else
-      body = "Your calorie count yesterday was: #{@calories}"
+      body = "Your calorie count yesterday was: #{@calories}, see the log here http://x.eatbit.co/users/#{user.id}/log"
     end
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
