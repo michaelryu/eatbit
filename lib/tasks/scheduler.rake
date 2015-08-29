@@ -5,9 +5,9 @@ task daily_summary: :environment do
       @calories += entry.calorie.to_i
     end
     if @calories == 0
-      body = "Whoops looks like we didn't record anything for you yesterday. Don’t forget to text us your food today."
+      body = "Looks like we didn't record anything for you yesterday. See more: http://x.eatbit.co/users/#{user.id}/log"
     else
-      body = "Your calorie count yesterday was: #{@calories}, see the log here http://x.eatbit.co/users/#{user.id}/log"
+      body = "Your calorie count yesterday was: #{@calories}. See more: http://x.eatbit.co/users/#{user.id}/log"
     end
     client = Twilio::REST::Client.new(Rails.application.secrets.twilio_account_sid,
                                       Rails.application.secrets.twilio_auth_token)
