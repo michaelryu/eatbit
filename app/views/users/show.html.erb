@@ -9,8 +9,8 @@
     </div>
   <% else %>
     <div class="col-sm-12">
-      <p class="lead">Subscribe for $29.99 per month, cancel anytime.</p>
-      <h5>Secure payment by <a href="http://www.stripe.com" target="_blank">Stripe</a></h5>
+      <p class="lead">Subscribe for a 1 month free trial, cancel anytime.</p>
+      <h5>Secure payment by <a href="http://www.stripe.com" target="_blank">Stripe</a>. <br> <br>$29.99/month after trial ends</h5>
     </div>
     <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
     <form accept-charset="UTF-8" action="/users/<%= @user.id %>/subscribe" data-cc-on-file="false" data-stripe-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>" id="payment-form" method="post">

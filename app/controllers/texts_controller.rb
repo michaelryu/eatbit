@@ -59,16 +59,21 @@ class TextsController < ApplicationController
 
   def user
     @user = User.find_by(phone: params['From'])
-    return if @user
-    @user = User.create(phone: params['From'], owner: params['To'])
-    message(@user.phone, "Welcome to Eatbit! Click to subscribe and enable your account: http://x.eatbit.co/users/#{@user.id}",
-            '415-592-6475')
-    message(@user.phone, 'Questions? Just ask!', '415-592-6475')
-  end
+    if @user.try(:subscribed?)
+      return
+    elsif @user && @user.subscribed == false
+      message(@user.phone, "We've saved your food item, but you need to signup to get the summaries. http://x.eatbit.co/users/#{@user.id}",
+              '415-592-6475')
+    else
+      @user = User.create(phone: params['From'], owner: params['To'])
+      message(@user.phone, "Welcome to Eatbit! Click to subscribe and enable your account: http://x.eatbit.co/users/#{@user.id}",
+              '415-592-6475')
+      message(@user.phone, 'Questions? Just ask!', '415-592-6475')
+    end
 
-  private
+    private
 
-  def text_params
-    params.require(:text).permit(:phone, :content, :user_id, :owner, :picture)
+    def text_params
+      params.require(:text).permit(:phone, :content, :user_id, :owner, :picture)
+    end
   end
-end

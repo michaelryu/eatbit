@@ -1,5 +1,5 @@
 task daily_summary: :environment do
-  User.all.each do |user|
+  User.where(subscribed: true).each do |user|
     @calories = 0
     user.entries.where('created_at BETWEEN ? AND ?', DateTime.now - 32.hours, DateTime.now - 8.hours).each do |entry|
       @calories += entry.calorie.to_i

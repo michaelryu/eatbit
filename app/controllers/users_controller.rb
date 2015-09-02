@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       customer = Stripe::Customer.create(
         source: token,
         plan: 'basic-calorie-plan',
+        trial_end: 1.month.from_now.to_i,
         metadata: { 'phone' => "#{@user.phone}" }
       )
 
