@@ -70,10 +70,11 @@ class TextsController < ApplicationController
               '415-592-6475')
       message(@user.phone, 'Questions? Just ask!', '415-592-6475')
     end
-
-    private
-
-    def text_params
-      params.require(:text).permit(:phone, :content, :user_id, :owner, :picture)
-    end
   end
+
+  private
+
+  def text_params
+    params.require(:text).permit(:phone, :content, :user_id, :owner, :picture)
+  end
+end
